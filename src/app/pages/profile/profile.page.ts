@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
-import { getToken } from 'src/model/getToken.model';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ModalController } from '@ionic/angular';
 
@@ -20,18 +19,16 @@ export class ProfilePage implements OnInit {
 
 
   Userdata = {
-    // nom: '',
-    // prenom: '',
-    // email: '',
+    nom: '',
+    prenom: '',
+    email: '',
     login:  ''
   };
 
   constructor(private modalController: ModalController,private router: Router,private http: HttpClient,private authservice:AuthService,private camera: Camera) { }
  
   ngOnInit() {
-    // setInterval( () =>{
       this.getataUser();
-    // },0);
   }
 
   dashboardPage()
@@ -44,18 +41,10 @@ export class ProfilePage implements OnInit {
   }
 
   getataUser() {
-    // this.authservice.userInfo(new getToken(this.token)).subscribe( 
-      // (data)=>{
-       //console.log(data)
-      //  data = JSON.parse(data);
-      //  console.log(data)
-      //  this.Userdata.nom = data['firstName'];
-      //  this.Userdata.prenom = data['lastName'];
-      //  this.Userdata.email = data['email'];
+       this.Userdata.nom = localStorage.getItem('firstNameField');
+       this.Userdata.prenom = localStorage.getItem('lastNameField');
+       this.Userdata.email = localStorage.getItem('emailField');
        this.Userdata.login = localStorage.getItem('loginad');
-
-      // }
-    // )
   }
 
   async openOptionSelection() {
@@ -83,10 +72,6 @@ export class ProfilePage implements OnInit {
       const libraryImage = await this.openLibrary();
       this.image = 'data:image/jpg;base64,' + libraryImage;
     }
-    // else{
-    //   console.log('delete');
-    //   this.photo = 'data:image/jpg;base64,' + this.default;
-    // }
   }
 
   async openCamera() {

@@ -23,15 +23,11 @@ const routes: Routes = [
   },
   {
     path: 'connexion',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./pages/authentification/authentification.module').then( m => m.RegisterPageModule)
   },
   {
     path: 'forgotpassword',
     loadChildren: () => import('./pages/forgotpassword/forgotpassword.module').then( m => m.ForgotpasswordPageModule)
-  },
-  {
-    path: 'dashboard',
-    loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule)
   },
   {
     path: 'faqs',
@@ -51,7 +47,7 @@ const routes: Routes = [
   },
   {
     path: 'changepassword',
-    loadChildren: () => import('./pages/changepassword/changepassword.module').then( m => m.ChangepasswordPageModule)
+    loadChildren: () => import('./pages/loader/loader.module').then( m => m.ChangepasswordPageModule)
   },
   {
     path: 'notifications',
@@ -67,11 +63,7 @@ const routes: Routes = [
   },
   {
     path: 'login-ad',
-    loadChildren: () => import('./login-ad/login-ad.module').then( m => m.LoginAdPageModule)
-  },
-  {
-    path: 'comptewindows',
-    loadChildren: () => import('./pages/comptewindows/comptewindows.module').then( m => m.ComptewindowsPageModule)
+    loadChildren: () => import('./pages/register/register.module').then( m => m.LoginAdPageModule)
   },
   {
     path: 'dashboard2',
@@ -116,7 +108,8 @@ const routes: Routes = [
   {
     path: 'test-code',
     loadChildren: () => import('./pages/test-code/test-code.module').then( m => m.TestCodePageModule)
-  },  {
+  },
+  {
     path: 'demande-windows',
     loadChildren: () => import('./pages/demande-windows/demande-windows.module').then( m => m.DemandeWindowsPageModule)
   },
@@ -127,6 +120,14 @@ const routes: Routes = [
   {
     path: 'demande-nessico',
     loadChildren: () => import('./pages/demande-nessico/demande-nessico.module').then( m => m.DemandeNessicoPageModule)
+  },
+  {
+    path: 'login-ad1',
+    loadChildren: () => import('./pages/finishregister/finishregister.module').then( m => m.LoginAd1PageModule)
+  },
+  {
+    path: 'finishforgotpassword',
+    loadChildren: () => import('./pages/finishforgotpassword/finishforgotpassword.module').then( m => m.FinishforgotpasswordPageModule)
   },
 
 

@@ -4,21 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DashboardPageRoutingModule } from './dashboard-routing.module';
+import { RegisterPageRoutingModule } from './authentification-routing.module';
 
-import { DashboardPage } from './dashboard.page';
-import { ComponentsModule } from './../../components/components.module';
+import { RegisterPage } from './authentification.page';
 import { Ng2OdometerModule } from 'ng2-odometer';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-	ComponentsModule,
     IonicModule,
-    DashboardPageRoutingModule,
+    RegisterPageRoutingModule,
 	Ng2OdometerModule.forRoot()
   ],
-  declarations: [DashboardPage]
+  declarations: [RegisterPage]
 })
-export class DashboardPageModule {}
+export class RegisterPageModule {}

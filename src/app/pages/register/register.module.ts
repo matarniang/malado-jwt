@@ -4,19 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RegisterPageRoutingModule } from './register-routing.module';
+import { LoginAdPageRoutingModule } from './register-routing.module';
 
-import { RegisterPage } from './register.page';
-import { Ng2OdometerModule } from 'ng2-odometer';
+import { LoginAdPage } from './register.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RegisterPageRoutingModule,
-	Ng2OdometerModule.forRoot()
+    LoginAdPageRoutingModule
   ],
-  declarations: [RegisterPage]
+  declarations: [LoginAdPage]
 })
-export class RegisterPageModule {}
+export class LoginAdPageModule {}

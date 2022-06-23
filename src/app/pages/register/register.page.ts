@@ -1,100 +1,71 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MaladoRequest } from 'src/model/maladoRequest.model';
+import { maladoRegisterRequest } from 'src/model/maladoRegisterRequest.model';
 import { AuthService } from 'src/app/services/auth.service';
 
+
 @Component({
-  selector: 'app-register',
+  selector: 'app-login-ad',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit {
-  loginadField:string
+export class LoginAdPage implements OnInit {
+  loginField:string
   passwordField:string
-  donner:string
-  loginad:string
-  correctPassword = true;
-  showPassword=true;
-  passwordToggleIcon= 'eye'
-  userIcon = 'person'
+  confirmeField:string
+  firstNameField=localStorage.getItem('firstNameField');
+  lastNameField=localStorage.getItem('lastNameField');
+  emailField=localStorage.getItem('emailField');
+  langKeyField:string
   isAlert=false;
-  alertMsg="coucou"
-  loader=false;
+  setinterval='false';
+  alertMsg="merci de derifier";
+  constructor(private router : Router,
+    private authservice : AuthService,
   
-  constructor(private router: Router,
-  private authservice : AuthService,) { }
+   ) {}
 
   ngOnInit() {
-   
-    setInterval( () =>{
-      if(this.isAlert==true){
-        this.isAlert=false;
-      }
-    },10000);
   }
-
-
-  togglePassword():void {
-    this.showPassword =! this.showPassword;
-
-    if (this.passwordToggleIcon=='eye'){
-      this.passwordToggleIcon ='eye-off';
-    }else{
-      this.passwordToggleIcon='eye';
-    }
-  }
-
-  
-
-homePage()
+  AuthentificationPage()
   {
-  this.router.navigate(['home'])
+   this.router.navigate(['login-ad1'])
+  }
+  register(){
+      this.authservice.register(new maladoRegisterRequest(this.loginField,this.emailField,this.passwordField,this.firstNameField,this.lastNameField,'fr')).subscribe( 
+      //next en cas de success
+      (data) =>{
+        //Aller a la page suivante 
+        console.log("Login valide")
+        console.log(data)
+        localStorage.setItem('loginad',this.loginField);
+        // localStorage.setItem('loginad',this.loginField);
+        // localStorage.setItem('setinterval','true');
+        this.router.navigate(['changepassword'])
+      },
+      //  en cas error 
+      (error) =>{
+        if(error.status==404){
+          
+          this.alertMsg="loginad n'existe pas dans la base"
+          this.isAlert = true;
+        }
+        else if (error.status==500){
+          this.alertMsg="loginad obligatoir"
+          this.isAlert = true;
+        }
+        else{
+          this.alertMsg="verifier votre connexion"
+          this.isAlert = true;
+        }
+      }
+    )
+  }  
   }
 
 
-Connexion(){
-  this.authservice.connexion(new MaladoRequest('', '', '', this.passwordField, this.loginadField)).subscribe( 
-    //next en cas de success
-    (data)=>{
-        // this.loader=true;
-        // this.donner = JSON.parse(data);
-        // this.donner = data;
-        // console.log(this.donner);
-        
-        if (data.status==200) {
-          localStorage.setItem('loginad', this.loginadField);
-          localStorage.setItem('token',data.body);
-          // this.loginad = data.body.email;
-          // this.loader=false;
-          console.log(data);
-          // console.log(this.loginad);
-        this.router.navigate(['dashboard2'])
-        }
-        // else
-        // this.router.navigate(['connexion'])
-  
-    },
-    (error) =>{
-      console.log(error);
-      if(error.status==400){
-        
-        this.alertMsg="login ou mot de passe n'existe pas"
-        this.isAlert = true;
-      }
-      else if (error.status==500){
-        this.alertMsg="loginad et mot de passe obligatoir"
-        this.isAlert = true;
-      }
-      else{
-        this.alertMsg="verifier votre connexion"
-        this.isAlert = true;
-      }
-    }
 
-  )
-}
 
-}
-
+ 
 
 

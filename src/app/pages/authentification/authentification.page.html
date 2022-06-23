@@ -1,0 +1,62 @@
+  
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button expand="block">
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+<ion-content class="mainbackground">
+  <div class="form-box">
+   <div class="logo"><img src="../../../assets/images/MALADO.png" ></div>
+   <div *ngIf="isAlert" class="alert alert-danger" role="alert">
+    {{alertMsg}}
+  </div>
+   <div class="title"><h1>Authentification</h1></div>
+    <div class="or">
+    </div>
+   <form ngForm="form" (submit)="Connexion()">
+     <div class="form-group">
+      <div>
+        <!-- <input type="text"  class="form-control" id="username" placeholder=" saisir votre loginAD" name="loginad" [(ngModel)]="loginadField" required="" /> -->
+        <ion-item class="form-control-m">
+          <ion-input  type="text"  placeholder="votre loginAD" name="loginad" [(ngModel)]="loginadField" required></ion-input>
+          <!-- <ion-icon [name]="userIcon"></ion-icon> -->
+        </ion-item>
+      </div> 
+      </div>
+      <div class="form-group">
+        <div>
+          <!-- <input type="password"  class="form-control" id="password" placeholder=" saisir votre mot de passe" name="password" [(ngModel)]="passwordField" required="" /> -->
+          <ion-item class="form-control-m">
+          <ion-input  type="password"  placeholder="mot de passe" [type]="showPassword ? 'text' : 'password'" name="password" [(ngModel)]="passwordField" required></ion-input>
+          <ion-icon [name]="passwordToggleIcon" slot="end" (click)="togglePassword()" clearInput></ion-icon>
+          </ion-item>
+        </div>
+      </div>
+      <div class="form-group">
+        <p style="color: black;text-align: center;"><a [routerLink]="['/forgotpassword']"><small>Mot de passe oublie?</small></a><br><br>
+        <small>Pas de compte ? </small><a [routerLink]="['/login-ad1']"> <small>S’INSCRIRE</small> </a></p>
+      </div>
+        <button  class="theme btn btn-primary form-control" style="padding: 0px;">Se Connecter</button>    
+        <div id="splash-screen" class="splash">
+          <div class="sk-fading-circle" *ngIf="loader">
+            <div class="sk-circle1 sk-circle"></div>
+            <div class="sk-circle2 sk-circle"></div>
+            <div class="sk-circle3 sk-circle"></div>
+            <div class="sk-circle4 sk-circle"></div>
+            <div class="sk-circle5 sk-circle"></div>
+            <div class="sk-circle6 sk-circle"></div>
+            <div class="sk-circle7 sk-circle"></div>
+            <div class="sk-circle8 sk-circle"></div>
+            <div class="sk-circle9 sk-circle"></div>
+            <div class="sk-circle10 sk-circle"></div>
+            <div class="sk-circle11 sk-circle"></div>
+            <div class="sk-circle12 sk-circle"></div>
+          </div>
+        </div>
+      </form>
+   </div>
+  </ion-content>
+
+
+

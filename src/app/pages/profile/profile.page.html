@@ -1,4 +1,3 @@
-<!-- <app-sidebar></app-sidebar> -->
 <ion-content class="mainbackground" [fullscreen]="true">
     <div class="header">
         <ion-toolbar>
@@ -6,7 +5,6 @@
         <div class="row">
         <div class="col-8"><div class="title"><a (click)="dashboardPage()" ><ion-icon name="arrow-back"></ion-icon></a></div>
         </div>
-        <!-- <div class="col-4 text-right"><a class="pulse-animation notification-btn"><i class="far fa-bell"></i></a> <div class="profile-pic" (click)="profilePage()"><img src="../../../assets/images/user-profile.jpg" class="width-100"/></div></div> -->
         </div>
         </div>
         </ion-toolbar>
@@ -16,15 +14,6 @@
 <div class="profile-box">
 <div class="top">  
 <div class="pic"><img src="../../../assets/images/profil.png" class="w-100"/></div>
-<!-- <div class="pic"><a (click)="addPhoto()"><img [src]="image" class="w-100"/></a></div> -->
-<!-- <div class="container"> 
-    <div class="outer" 
-      [ngStyle]="{'background-image' : 'url(' + image + ')'}"> 
-        <div class="inner" (click)="openOptionSelection()"> 
-           <ion-icon name="camera" class="camera-icon"></ion-icon> 
-        </div> 
-     </div> 
-</div>  -->
 <div class="name">{{ Userdata.nom }} {{ Userdata.prenom }}</div>
 <div class="location">Dakar, SENEGAl</div>
 </div>
@@ -44,17 +33,15 @@
 <div class="head">Informations Personel</div>
 <div class="card">
 <div class="card-body">
-<div class="label">Address</div>
-<!-- <div class="value">rue 06x27 Medina, Dakar, SENEGAL</div> -->
-<div class="label">Email</div>
-<!-- <div class="value">{{Userdata.email}}</div> -->
-<!-- <div class="value">niangastou1997@gmail.com</div> -->
+<div class="label">Telephone</div>
+<!-- <div class="value">{{Userdata.nom}}-{{Userdata.prenom}}</div> -->
+<div class="value">78 XXX XX XX</div>
 <div class="label">Loginad</div>
 <div class="value">{{Userdata.login}}</div>
-<!-- <div class="value">STG_niang59315</div>  -->
+<div class="label">Email</div>
+<div class="value">{{Userdata.email}}</div>
 </div>
 </div>
 </div>
 </div>
 </ion-content>
-<!-- <app-footer></app-footer> -->

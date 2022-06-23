@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ChangepasswordPageRoutingModule } from './changepassword-routing.module';
+import { ChangepasswordPageRoutingModule } from './loader-routing.module';
 
-import { ChangepasswordPage } from './changepassword.page';
-import { ComponentsModule } from './../../components/components.module';
+import { ChangepasswordPage } from './loader.page';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [

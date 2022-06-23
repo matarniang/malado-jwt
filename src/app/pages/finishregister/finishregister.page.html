@@ -16,16 +16,16 @@
    <form ngForm="form" (submit)="register()">
      <div class="form-group">
       <div>
-        <input type="text"  class="form-control" id="login" placeholder=" saisi votre loginAd" name="login" [(ngModel)]="loginField" required="" />
-      </div>
+        <input type="email"  class="form-control" id="email" placeholder=" saisir votre email" name="email" [(ngModel)]="emailField" required="true" />
+      </div> 
       <div>
-        <input type="password"  class="form-control" id="password" placeholder=" nouveau mot de passe" name="password" [(ngModel)]="passwordField" required="" />
+        <input type="text" class="form-control" id="prenom" placeholder=" saisir votre prenom" name="prenom" [(ngModel)]="firstNameField" required="true" />
       </div>  
       <div >
-        <input type="password"  class="form-control" id="confirme" placeholder=" comfirmation du mot de passe" name="confirme" [(ngModel)]="confirmeField" required="" />
+        <input type="text" class="form-control" id="nom" placeholder=" saisir votre nom" name="nom" [(ngModel)]="lastNameField" required="true" />
       </div> 
       </div>
-        <button  class="theme btn btn-primary form-control" style="padding: 0px;">Continuer</button>    
+        <button class="theme btn btn-primary form-control" style="padding: 0px;">Continuer</button>    
    </form>
    </div>
   </ion-content>

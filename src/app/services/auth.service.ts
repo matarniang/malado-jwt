@@ -1,42 +1,34 @@
 import { Injectable } from "@angular/core";
 import { MaladoRequest } from "../../model/maladoRequest.model";
+import { maladoRegisterRequest } from "../../model/maladoRegisterRequest.model";
 import { DemandeRequest } from "../../model/demandeRequest.model";
 import { deleteDemandeRequest} from '../../model/deleteDemandeRequest.model';
-import { getToken} from '../../model/getToken.model';
-
 import { environnement } from "../shared/environnement";
 import { config } from "../config/config";
-import { HttpClient, HttpResponse } from '@angular/common/http';
-// export type EntityResponseType = HttpResponse<DemandeRequest>;
+import { HttpClient} from '@angular/common/http';
+import { changePasswordRequest } from '../../model/changePasswordRequest.model';
 
 @Injectable({
     providedIn: 'root'
  })
 export class AuthService {
-
     constructor(private http: HttpClient){ }
-
-    
     public pointoracle: string= "services/oracle/api/"
     public pointwindows: string= "services/windows/api/"
     public pointnessico: string= "services/nessico/api/"
-
     public url: string= "api/"
 
-    loginad(data:MaladoRequest): any{
-       return this.http.post(environnement.localurl + this.url + 'loginad', data, {headers:config.jsonHeader, responseType: 'text'});
+    register(data:maladoRegisterRequest): any{
+       return this.http.post(environnement.localurl + this.url + 'register', data, {headers:config.jsonHeader, responseType: 'text', observe: 'response'});
     }
-
     maladoconnexion(data:MaladoRequest){
         return this.http.post(environnement.localurl + this.url + 'password', data, {headers:config.jsonHeader, responseType: 'text'});
      }
-
      demandeOracle(data:DemandeRequest){
         return this.http.post(environnement.localurl + this.pointoracle + 'demande-oracles', data, {headers:config.jsonHeader, responseType: 'text'});
      }
      demandeWindows(data:DemandeRequest){
         return this.http.post(environnement.localurl + this.pointwindows + 'demande-windows', data, {headers:config.jsonHeader, responseType: 'text'});
-    
      }
      demandeNessico(data:DemandeRequest){
         return this.http.post(environnement.localurl + this.pointnessico + 'demande-nessicos', data, {headers:config.jsonHeader, responseType: 'text',observe: 'response'});
@@ -59,32 +51,27 @@ export class AuthService {
     deleteDemandeWindows(data:deleteDemandeRequest){
         return this.http.post(environnement.localurl + this.pointwindows + 'demande-windows-delete', data, {headers:config.jsonHeader, responseType: 'text',observe: 'response'});
      }
-    isEnabled(data:MaladoRequest) : any{
+    isEnabled(data:maladoRegisterRequest) : any{
         return this.http.post(environnement.localurl + this.url + 'enable', data, {headers:config.jsonHeader, responseType: 'text',observe: 'response'});
-    }
-    userInfo(data:getToken){
-        return this.http.post(environnement.localurl + this.url +'userinfo', data, {headers:config.jsonHeader, responseType: 'text',observe: 'response'});
-    }
-    passwordVerification(data:MaladoRequest) : any{
-        return this.http.post(environnement.localurl + this.url +'passwordVerification', data, {headers:config.jsonHeader, responseType: 'text',observe: 'response'});
     }
     confirmpassword(data:MaladoRequest){
         return this.http.post(environnement.localurl + this.url +'confirmpassword', data, {headers:config.jsonHeader, responseType: 'text',observe: 'response'});
     }
-
     connexion(data:MaladoRequest): any{
-        return this.http.post(environnement.localurl + this.url + 'authenticate-mobile', data, { headers:config.jsonHeader, responseType: 'text',observe: 'response'});
+        return this.http.post(environnement.localurl + this.url + 'authenticate', data, { headers:config.jsonHeader, responseType: 'text',observe: 'response'});
     }
-    
-    tokenValidation(data:MaladoRequest){
-        return this.http.post(environnement.localurl + this.url + 'token', data, {headers:config.jsonHeader, responseType: 'text',observe: 'response'});
-
+    forgotpassword(data:changePasswordRequest){
+        return this.http.post(environnement.localurl + this.url + 'account/reset-password/init', data, {headers:config.jsonHeader, responseType: 'text',observe: 'response'});
     } 
-    forgotpassword(data:MaladoRequest){
-        return this.http.post(environnement.localurl + this.url + 'forgotpassword', data, {headers:config.jsonHeader, responseType: 'text',observe: 'response'});
-
-    } 
-
+    verificationKey(data:changePasswordRequest){
+         return this.http.post(environnement.localurl + this.url + 'verificationKey', data, {headers:config.jsonHeader, responseType: 'text',observe: 'response'});
+    }
+    finishforgotpassword(data:changePasswordRequest){
+      return this.http.post(environnement.localurl + this.url + 'account/reset-password/finish', data, {headers:config.jsonHeader, responseType: 'text',observe: 'response'});
+    }
+   // userInfo(data:getToken){
+    //     return this.http.post(environnement.localurl + this.url +'userinfo', data, {headers:config.jsonHeader, responseType: 'text',observe: 'response'});
+    // }
 }
 
 

@@ -10,7 +10,7 @@
     <ion-card *ngFor="let item of todoList;" class="mainbackground">
       <ion-card-header class="mainbackground">
         <ion-card-subtitle [style.color]="item['status'] === 'i' ? 'red' : (item['status'] === 'ok' ? 'green' : 'orange')">
-          {{item['action']}} {{item['nomApp']}}
+          {{item['action']}}
         </ion-card-subtitle>
         <ion-item class="mainbackground">
           <ion-icon *ngIf="item['status'] === 'i'" color="danger" size="small" name="document"></ion-icon>

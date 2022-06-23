@@ -1,29 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { async } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { MaladoRequest } from 'src/model/maladoRequest.model';
+import { maladoRegisterRequest } from 'src/model/maladoRegisterRequest.model';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { BehaviorSubject } from 'rxjs';
 const circleR = 80;
- const circleDasharray = 2 * Math.PI * circleR;
-
+const circleDasharray = 2 * Math.PI * circleR;
 
 @Component({
   selector: 'app-changepassword',
-  templateUrl: './changepassword.page.html',
-  styleUrls: ['./changepassword.page.scss'],
+  templateUrl: './loader.page.html',
+  styleUrls: ['./loader.page.scss'],
 })
 export class ChangepasswordPage implements OnInit {
-  confirmdField = ''
-  passwordChamp = ''
-  isActivated = false;
+  confirmdField=''
+  passwordChamp=''
+  isActivated=false;
   isFirstConnection = true;
-  loginAd= localStorage.getItem('loginAd');
-  token= localStorage.getItem('token')
+  loginad=localStorage.getItem('loginad');
+  token=localStorage.getItem('token')
   loginField:string
   hasPassword = true;
-
+  seinterval;
   showPassword= false;
   passwordToggleIcon= 'eye'
   userIcon = 'person'
@@ -37,7 +36,6 @@ startduration = 5;
 circleR = circleR ;
 circleDasharray = circleDasharray ;
 state: 'start' | 'stop' = 'stop';
-// 
  
   constructor(private router: Router,
      private alerteCtrl: AlertController,
@@ -75,30 +73,33 @@ state: 'start' | 'stop' = 'stop';
 
   ngOnInit() {
     this.isEnabled(enabled => {
-       if (this.isActivated){
+       if (this.isActivated){  
          //le compte est activé
-         //this.stopTimer();
-        this.checkConnection(hasPassword => {
-          if (hasPassword) {
-            // il a déja un mot de passe
-            this.router.navigate(['connexion'])
+        //  //this.stopTimer();
+        // this.checkConnection(hasPassword => {
+        //   if (hasPassword) {
+        //     // il a déja un mot de passe
+        //     this.router.navigate(['connexion'])
 
-          } else {
-            // il n'a pas encore de mot de passe.
-            this.router.navigate(['changepassword'])
-          }
-        })
+        //   } else {
+        //     // il n'a pas encore de mot de passe.
+        //     this.router.navigate(['changepassword'])
+        //   }
+        this.router.navigate(['dashboard2']);
+
        } else {
          // il n'a pas encore validé son compte et/ou son lien a expiré
          // vérifier si le token is toujours actif.
-          //this.tokenValidation()
           this.startTimer(1);
-          setInterval(() => {
+          this.seinterval=setInterval(() => {
             this.isEnabled(enabled =>{
               if (this.isActivated){
+                clearInterval(this.seinterval);
                 this.stopTimer();
+                  this.router.navigate(['connexion']);
                 //le compte vient d'être activé
-                this.hasPassword = false;
+                // this.hasPassword = false;
+
               }
             })
           },1000); 
@@ -108,38 +109,40 @@ state: 'start' | 'stop' = 'stop';
   }
 
 
-   checkConnection(cb) {
-    this.authservice.passwordVerification(new MaladoRequest('', '', '', '', this.loginAd)).subscribe( 
-      (data)=>{
-        this.hasPassword = data === 'true' ? true : false;
-        return cb(data === 'true' ? true : false)
-      }
-    )
-  }
+  //  checkConnection(cb) {
+  //   this.authservice.passwordVerification(new maladoRegisterRequest(this.loginad,'', '', '')).subscribe( 
+  //     (data)=>{
+  //       this.hasPassword = data === 'true' ? true : false;
+  //       return cb(data === 'true' ? true : false)
+  //     }
+  //   )
+  // }
 
   isEnabled(cb) {
-      this.authservice.isEnabled(new MaladoRequest('', '', '', '', this.loginAd)).subscribe( 
+      this.authservice.isEnabled(new maladoRegisterRequest(this.loginad,'', '', '')).subscribe( 
       (data) => {
-        this.isActivated = data === 'true' ? true : false;
+        
+        data = JSON.parse(data.body)
+        this.isActivated = data['activated'] === true ? true : false;
         cb(this.isActivated)
       })
    }
 
-   confirmpassword(){
-      this.authservice.confirmpassword(new MaladoRequest('', '','',this.passwordChamp,this.loginAd)).subscribe(
-        (data) =>{
-          console.log(data)
-          localStorage.setItem('loginAd', this.loginAd)
-          this.router.navigate(['dashboard2'])
+  //  confirmpassword(){
+  //     this.authservice.confirmpassword(new MaladoRequest('', '','',this.passwordChamp,this.loginad)).subscribe(
+  //       (data) =>{
+  //         console.log(data)
+  //         localStorage.setItem('loginAd', this.loginad)
+  //         this.router.navigate(['dashboard2'])
           
-        },
-        (error) =>{
-          console.log("erreur password")
-          console.log(error.message)
-        }
+  //       },
+  //       (error) =>{
+  //         console.log("erreur password")
+  //         console.log(error.message)
+  //       }
           
-      )
-   }
+  //     )
+  //  }
 
 
 startTimer(duration: number){
@@ -156,6 +159,7 @@ stopTimer(){
   clearInterval(this.interval);
   this.time.next('00:00');
   this.state = 'stop';
+
 }
 
 percentageOffset(percent){
@@ -190,3 +194,10 @@ updatetimeValue(){
 }
 
 }
+
+
+
+
+
+
+

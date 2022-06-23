@@ -1,9 +1,9 @@
 import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
 
 import { MenuController } from '@ionic/angular';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { DemandeRequest } from 'src/model/demandeRequest.model';
 import { AuthService } from 'src/app/services/auth.service';
 export type EntityResponseType = HttpResponse<DemandeRequest>;
